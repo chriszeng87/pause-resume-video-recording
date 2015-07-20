@@ -16,6 +16,16 @@
 
 package com.android.grafika;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
+import android.app.Activity;
+import android.graphics.SurfaceTexture;
+import android.hardware.Camera;
 import android.opengl.EGL14;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
@@ -30,19 +40,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.app.Activity;
-import android.graphics.SurfaceTexture;
-import android.hardware.Camera;
 
 import com.android.grafika.gles.FullFrameRect;
 import com.android.grafika.gles.Texture2dProgram;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
-
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
 
 /**
  * Shows the camera preview on screen while simultaneously recording it to a .mp4 file.
@@ -735,7 +735,6 @@ class CameraSurfaceRenderer implements GLSurfaceView.Renderer {
         if (!mPauseEnabled) {
         	mVideoEncoder.frameAvailable(mSurfaceTexture);
         } else {
-        	Log.e("Chris","---------------pause");
         	mVideoEncoder.pause();
         }
 

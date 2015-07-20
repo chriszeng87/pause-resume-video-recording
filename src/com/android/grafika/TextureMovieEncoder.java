@@ -221,12 +221,12 @@ public class TextureMovieEncoder implements Runnable {
         if (mPause && !mPauseTimeStamp.isEmpty()) {
         	mPause =  false;
         	mResumeTimeStamp.add(timestamp);
+        	//hack: 50 is to be rethink
         	timestamp = mPauseTimeStamp.get(mPauseTimeStamp.size() - 1) + 50;
         } else if (!mPause && !mResumeTimeStamp.isEmpty()) {
         	timestamp = mPauseTimeStamp.get(mPauseTimeStamp.size() - 1) + 
         			timestamp - mResumeTimeStamp.get(mResumeTimeStamp.size() - 1);
-        }
-        Log.e("Chris","--------timestamp = " + timestamp);
+        };
         if (timestamp == 0) {
             // Seeing this after device is toggled off/on with power button.  The
             // first frame back has a zero timestamp.
