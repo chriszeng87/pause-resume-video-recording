@@ -30,6 +30,7 @@ import android.opengl.EGL14;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -148,8 +149,8 @@ public class CameraCaptureActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_capture);
 
-        File outputFile = new File("/sdcard",//getFilesDir(), 
-        		"camera-test.mp4");
+        File outputFile = new File(Environment.getExternalStorageDirectory(),
+        		"test.mp4");
         TextView fileText = (TextView) findViewById(R.id.cameraOutputFile_text);
         fileText.setText(outputFile.toString());
 

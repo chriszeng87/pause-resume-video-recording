@@ -29,8 +29,8 @@
         android:id="@+id/cameraPreview_afl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/toggleRecording_button"
         android:layout_centerInParent="true" >
@@ -43,21 +43,21 @@
     </com.android.grafika.AspectFrameLayout>
 
     <Button
-        android:id="@+id/togPause_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="clickTogglePause"
-        android:text="@string/toggleRecordingPause" />
-
-    <Button
         android:id="@+id/toggleRecording_button"
         style="?android:attr/buttonStyleSmall"
-        android:layout_toRightOf="@id/togPause_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="clickToggleRecording"
         android:text="@string/toggleRecordingOn" />
+
+    <Button
+        android:id="@+id/togPause_button"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/toggleRecording_button"
+        android:onClick="clickTogglePause"
+        android:text="@string/toggleRecordingPause" />
 
     <Spinner
         android:id="@+id/cameraFilter_spinner"
