@@ -24,6 +24,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.EGL14;
@@ -315,6 +316,12 @@ public class CameraCaptureActivity extends Activity
      */
     public void clickToggleRecording(@SuppressWarnings("unused") View unused) {
         mRecordingEnabled = !mRecordingEnabled;
+        if (!mRecordingEnabled) {
+        	Intent intent = new Intent();
+        	intent.putExtra("video", Environment.getExternalStorageDirectory() + "/test.mp4");
+        	intent.setClass(this, PlayMovieSurfaceActivity.class);
+        	this.startActivity(intent);
+        }
         mGLView.queueEvent(new Runnable() {
             @Override public void run() {
                 // notify the renderer that we want to change the encoder's state
