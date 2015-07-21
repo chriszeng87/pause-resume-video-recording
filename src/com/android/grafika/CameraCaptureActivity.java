@@ -189,11 +189,12 @@ public class CameraCaptureActivity extends Activity
         Log.d(TAG, "onResume -- acquiring camera");
         super.onResume();
         updateControls();
-        openCamera(1280, 720);      // updates mCameraPreviewWidth/Height
+        openCamera(720, 1280);      // updates mCameraPreviewWidth/Height
 
         // Set the preview aspect ratio.
         AspectFrameLayout layout = (AspectFrameLayout) findViewById(R.id.cameraPreview_afl);
-        layout.setAspectRatio((double) mCameraPreviewWidth / mCameraPreviewHeight);
+        layout.setAspectRatio((double) mCameraPreviewHeight / mCameraPreviewWidth);
+        		//(double) mCameraPreviewWidth / mCameraPreviewHeight);
 
         mGLView.onResume();
         mGLView.queueEvent(new Runnable() {
