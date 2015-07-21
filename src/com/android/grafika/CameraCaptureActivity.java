@@ -35,6 +35,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Surface;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -281,6 +282,7 @@ public class CameraCaptureActivity extends Activity
 
         // leave the frame rate set to default
         mCamera.setParameters(parms);
+        setCameraDisplayOrientation(Camera.CameraInfo.CAMERA_FACING_BACK, mCamera);
 
         int[] fpsRange = new int[2];
         Camera.Size mCameraPreviewSize = parms.getPreviewSize();
@@ -297,6 +299,39 @@ public class CameraCaptureActivity extends Activity
 
         mCameraPreviewWidth = mCameraPreviewSize.width;
         mCameraPreviewHeight = mCameraPreviewSize.height;
+    }
+
+    public void setCameraDisplayOrientation(int facing, final Camera camera) {
+        int result = getCameraDisplayOrientation(facing);
+        camera.setDisplayOrientation(result);
+    }
+
+    public int getCameraDisplayOrientation(int facing) {
+        int rotation = getWindowManager().getDefaultDisplay()
+                .getRotation();
+        int degrees = 0;
+        switch (rotation) {
+            case Surface.ROTATION_0:
+                degrees = 0;
+                break;
+            case Surface.ROTATION_90:
+                degrees = 90;
+                break;
+            case Surface.ROTATION_180:
+                degrees = 180;
+                break;
+            case Surface.ROTATION_270:
+                degrees = 270;
+                break;
+        }
+
+        int result;
+        if (facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            result = (0 + degrees) % 360;
+        } else { // back-facing
+            result = (90 - degrees + 360) % 360;
+        }
+        return result;
     }
 
     /**
