@@ -189,12 +189,12 @@ public class CameraCaptureActivity extends Activity
         Log.d(TAG, "onResume -- acquiring camera");
         super.onResume();
         updateControls();
-        openCamera(720, 1280);      // updates mCameraPreviewWidth/Height
+        openCamera(1088, 1088);      // updates mCameraPreviewWidth/Height
 
         // Set the preview aspect ratio.
         AspectFrameLayout layout = (AspectFrameLayout) findViewById(R.id.cameraPreview_afl);
-        layout.setAspectRatio((double) mCameraPreviewHeight / mCameraPreviewWidth);
-        		//(double) mCameraPreviewWidth / mCameraPreviewHeight);
+        layout.setAspectRatio(//(double) mCameraPreviewHeight / mCameraPreviewWidth);
+        		(double) mCameraPreviewWidth / mCameraPreviewHeight);
 
         mGLView.onResume();
         mGLView.queueEvent(new Runnable() {
@@ -341,6 +341,7 @@ public class CameraCaptureActivity extends Activity
     private void releaseCamera() {
         if (mCamera != null) {
             mCamera.stopPreview();
+//            mCamera.setPreviewTexture(null);
             mCamera.release();
             mCamera = null;
             Log.d(TAG, "releaseCamera -- done");
@@ -352,12 +353,12 @@ public class CameraCaptureActivity extends Activity
      */
     public void clickToggleRecording(@SuppressWarnings("unused") View unused) {
         mRecordingEnabled = !mRecordingEnabled;
-        if (!mRecordingEnabled) {
-        	Intent intent = new Intent();
-        	intent.putExtra("video", Environment.getExternalStorageDirectory() + "/test.mp4");
-        	intent.setClass(this, PlayMovieSurfaceActivity.class);
-        	this.startActivity(intent);
-        }
+//        if (!mRecordingEnabled) {
+//        	Intent intent = new Intent();
+//        	intent.putExtra("video", Environment.getExternalStorageDirectory() + "/test.mp4");
+//        	intent.setClass(this, PlayMovieSurfaceActivity.class);
+//        	this.startActivity(intent);
+//        }
         mGLView.queueEvent(new Runnable() {
             @Override public void run() {
                 // notify the renderer that we want to change the encoder's state
@@ -456,6 +457,7 @@ public class CameraCaptureActivity extends Activity
      */
     static class CameraHandler extends Handler {
         public static final int MSG_SET_SURFACE_TEXTURE = 0;
+        public static final int MSG_STOP_RECORDING = 1;
 
         // Weak reference to the Activity; only access this from the UI thread.
         private WeakReference<CameraCaptureActivity> mWeakActivity;
@@ -486,6 +488,12 @@ public class CameraCaptureActivity extends Activity
             switch (what) {
                 case MSG_SET_SURFACE_TEXTURE:
                     activity.handleSetSurfaceTexture((SurfaceTexture) inputMessage.obj);
+                    break;
+                case MSG_STOP_RECORDING:
+                    Intent intent = new Intent();
+                    intent.putExtra("video", Environment.getExternalStorageDirectory() + "/test.mp4");
+        	        intent.setClass(activity, PlayMovieSurfaceActivity.class);
+                    activity.startActivity(intent);
                     break;
                 default:
                     throw new RuntimeException("unknown msg " + what);
@@ -758,6 +766,8 @@ class CameraSurfaceRenderer implements GLSurfaceView.Renderer {
                     Log.d(TAG, "STOP recording");
                     mVideoEncoder.stopRecording();
                     mRecordingStatus = RECORDING_OFF;
+                    mCameraHandler.sendMessage(mCameraHandler.obtainMessage(
+                            CameraCaptureActivity.CameraHandler.MSG_STOP_RECORDING));
                     break;
                 case RECORDING_OFF:
                     // yay
