@@ -280,7 +280,7 @@ public class CameraCaptureActivity extends Activity
         // Give the camera a hint that we're recording video.  This can have a big
         // impact on frame rate.
         parms.setRecordingHint(true);
-        parms.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+//        parms.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
 
         // leave the frame rate set to default
         mCamera.setParameters(parms);
