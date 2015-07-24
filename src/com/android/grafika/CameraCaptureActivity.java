@@ -122,7 +122,8 @@ import com.android.grafika.gles.Texture2dProgram;
  * is managed as a static property of the Activity.
  */
 public class CameraCaptureActivity extends Activity
-        implements SurfaceTexture.OnFrameAvailableListener, OnItemSelectedListener {
+        implements SurfaceTexture.OnFrameAvailableListener, OnItemSelectedListener,
+        View.OnClickListener{
     private static final String TAG = MainActivity.TAG;
     private static final boolean VERBOSE = false;
 
@@ -140,6 +141,7 @@ public class CameraCaptureActivity extends Activity
     private CameraHandler mCameraHandler;
     private boolean mRecordingEnabled;      // controls button state
     private boolean mPauseEnabled;
+    private View mCaptureButton;
 
     private int mCameraPreviewWidth, mCameraPreviewHeight;
 
@@ -172,6 +174,8 @@ public class CameraCaptureActivity extends Activity
         mPauseEnabled = false;
 
         mRecordingEnabled = sVideoEncoder.isRecording();
+        mCaptureButton = findViewById(R.id.capture_image_button);
+        mCaptureButton.setOnClickListener(this);
 
         // Configure the GLSurfaceView.  This will start the Renderer thread, with an
         // appropriate EGL context.
@@ -502,6 +506,24 @@ public class CameraCaptureActivity extends Activity
             }
         }
     }
+
+	@Override
+	public void onClick(View v) {
+		switch(v.getId()) {
+			case R.id.capture_image_button:
+		        mRecordingEnabled = !mRecordingEnabled;
+		        mGLView.queueEvent(new Runnable() {
+		            @Override public void run() {
+		                // notify the renderer that we want to change the encoder's state
+		                mRenderer.changeRecordingState(mRecordingEnabled);
+		            }
+		        });
+				break;
+			default:
+				break;
+		}
+		
+	}
 }
 
 /**
