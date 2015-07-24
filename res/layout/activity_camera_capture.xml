@@ -39,6 +39,20 @@
             android:layout_height="match_parent"
             android:layout_gravity="center" />
     </com.android.grafika.AspectFrameLayout>
+    
+    <View
+        android:id="@+id/cover_top_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignTop="@id/cameraPreview_afl"
+        android:background="@android:color/black"/>
+
+    <View
+        android:id="@+id/cover_bottom_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignBottom="@id/cameraPreview_afl"
+        android:background="@android:color/black"/>
 
     <Button
         android:id="@+id/toggleRecording_button"
