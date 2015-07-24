@@ -27,6 +27,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
+import android.hardware.Camera.CameraInfo;
 import android.opengl.EGL14;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
@@ -289,7 +290,8 @@ public class CameraCaptureActivity extends Activity
 
         // leave the frame rate set to default
         mCamera.setParameters(parms);
-        setCameraDisplayOrientation(Camera.CameraInfo.CAMERA_FACING_BACK, mCamera);
+//        setCameraDisplayOrientation(Camera.CameraInfo.CAMERA_FACING_BACK, mCamera);
+        determineDisplayOrientation();
 
         int[] fpsRange = new int[2];
         Camera.Size mCameraPreviewSize = parms.getPreviewSize();
@@ -308,38 +310,87 @@ public class CameraCaptureActivity extends Activity
         mCameraPreviewHeight = mCameraPreviewSize.height;
     }
 
-    public void setCameraDisplayOrientation(int facing, final Camera camera) {
-        int result = getCameraDisplayOrientation(facing);
-        camera.setDisplayOrientation(result);
+//    public void setCameraDisplayOrientation(int facing, final Camera camera) {
+//        int result = getCameraDisplayOrientation(facing);
+//        camera.setDisplayOrientation(result);
+//    }
+    
+    private int getBackCameraID() {
+        return CameraInfo.CAMERA_FACING_BACK;
     }
+    
+    /**
+     * Determine the current display orientation and rotate the camera preview
+     * accordingly
+     */
+    private void determineDisplayOrientation() {
+        CameraInfo cameraInfo = new CameraInfo();
+        Camera.getCameraInfo(getBackCameraID(), cameraInfo);
 
-    public int getCameraDisplayOrientation(int facing) {
-        int rotation = getWindowManager().getDefaultDisplay()
-                .getRotation();
+        int rotation = getWindowManager().getDefaultDisplay().getRotation();
         int degrees = 0;
+
         switch (rotation) {
-            case Surface.ROTATION_0:
+            case Surface.ROTATION_0: {
                 degrees = 0;
                 break;
-            case Surface.ROTATION_90:
+            }
+            case Surface.ROTATION_90: {
                 degrees = 90;
                 break;
-            case Surface.ROTATION_180:
+            }
+            case Surface.ROTATION_180: {
                 degrees = 180;
                 break;
-            case Surface.ROTATION_270:
+            }
+            case Surface.ROTATION_270: {
                 degrees = 270;
                 break;
+            }
         }
 
-        int result;
-        if (facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-            result = (0 + degrees) % 360;
-        } else { // back-facing
-            result = (90 - degrees + 360) % 360;
+        int displayOrientation;
+
+        // Camera direction
+        if (cameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT) {
+            // Orientation is angle of rotation when facing the camera for
+            // the camera image to match the natural orientation of the device
+            displayOrientation = (cameraInfo.orientation + degrees) % 360;
+            displayOrientation = (360 - displayOrientation) % 360;
+        } else {
+            displayOrientation = (cameraInfo.orientation - degrees + 360) % 360;
         }
-        return result;
+
+        mCamera.setDisplayOrientation(displayOrientation);
     }
+
+//    public int getCameraDisplayOrientation(int facing) {
+//        int rotation = getWindowManager().getDefaultDisplay()
+//                .getRotation();
+//        int degrees = 0;
+//        switch (rotation) {
+//            case Surface.ROTATION_0:
+//                degrees = 0;
+//                break;
+//            case Surface.ROTATION_90:
+//                degrees = 90;
+//                break;
+//            case Surface.ROTATION_180:
+//                degrees = 180;
+//                break;
+//            case Surface.ROTATION_270:
+//                degrees = 270;
+//                break;
+//        }
+//
+//        int result;
+//        if (facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+//            result = (0 + degrees) % 360;
+//        } else { // back-facing
+//            result = (90 - degrees + 360) % 360;
+//        }
+//        return result;
+//    }
 
     /**
      * Stops camera preview, and releases the camera to the system.
