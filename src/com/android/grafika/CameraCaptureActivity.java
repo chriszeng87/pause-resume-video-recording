@@ -213,6 +213,7 @@ public class CameraCaptureActivity extends Activity
         mGLView.queueEvent(new Runnable() {
             @Override public void run() {
                 // Tell the renderer that it's about to be paused so it can clean up.
+            	//TODO Stop MediaCodec? users may click home button and never come back again 
                 mRenderer.notifyPausing();
             }
         });
