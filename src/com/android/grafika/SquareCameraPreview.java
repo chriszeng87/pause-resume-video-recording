@@ -152,7 +152,9 @@ public class SquareCameraPreview extends GLSurfaceView {
             if (zoom > 0) zoom -= ZOOM_DELTA;
         }
         params.setZoom(zoom);
-        mCamera.setParameters(params);
+        if (mCamera != null) {
+        	mCamera.setParameters(params);
+        }
     }
 
     private void handleFocus(Camera.Parameters params) {
@@ -167,13 +169,15 @@ public class SquareCameraPreview extends GLSurfaceView {
             Log.d(TAG, mFocusAreas.size() + "");
             params.setFocusAreas(mFocusAreas);
             params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-            mCamera.setParameters(params);
-            mCamera.autoFocus(new Camera.AutoFocusCallback() {
-                @Override
-                public void onAutoFocus(boolean success, Camera camera) {
-                    // Callback when the auto focus completes
-                }
-            });
+            if (mCamera != null) {
+	            mCamera.setParameters(params);
+	            mCamera.autoFocus(new Camera.AutoFocusCallback() {
+	                @Override
+	                public void onAutoFocus(boolean success, Camera camera) {
+	                    // Callback when the auto focus completes
+	                }
+	            });
+            }
         }
     }
 
@@ -198,7 +202,9 @@ public class SquareCameraPreview extends GLSurfaceView {
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
             mScaleFactor = (int) detector.getScaleFactor();
-            handleZoom(mCamera.getParameters());
+            if (mCamera != null) {
+            	handleZoom(mCamera.getParameters());
+            }
             return true;
         }
     }

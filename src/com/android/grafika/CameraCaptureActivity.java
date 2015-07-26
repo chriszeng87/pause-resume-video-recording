@@ -143,7 +143,7 @@ public class CameraCaptureActivity extends Activity
     static final int FILTER_EMBOSS = 5;
     static final int PREVIEW_SIZE_MAX_WIDTH = 640;
 
-    private GLSurfaceView mGLView;
+    private SquareCameraPreview mGLView;
     private CameraSurfaceRenderer mRenderer;
     private Camera mCamera;
     private CameraHandler mCameraHandler;
@@ -195,7 +195,7 @@ public class CameraCaptureActivity extends Activity
 
         // Configure the GLSurfaceView.  This will start the Renderer thread, with an
         // appropriate EGL context.
-        mGLView = (GLSurfaceView) findViewById(R.id.camera_preview_view);
+        mGLView = (SquareCameraPreview) findViewById(R.id.camera_preview_view);
         mGLView.setEGLContextClientVersion(2);     // select GLES 2.0
         mRenderer = new CameraSurfaceRenderer(mCameraHandler, sVideoEncoder, outputFile);
         mGLView.setRenderer(mRenderer);
@@ -348,6 +348,7 @@ public class CameraCaptureActivity extends Activity
             Log.d(TAG, "No front-facing camera found; opening default");
             mCamera = Camera.open();    // opens first back-facing camera
         }
+        mGLView.setCamera(mCamera);
         if (mCamera == null) {
             throw new RuntimeException("Unable to open camera");
         }
@@ -481,6 +482,7 @@ public class CameraCaptureActivity extends Activity
     private void releaseCamera() {
         if (mCamera != null) {
             mCamera.stopPreview();
+            mGLView.setCamera(null);
 //            mCamera.setPreviewTexture(null);
             mCamera.release();
             mCamera = null;
