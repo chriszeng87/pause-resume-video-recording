@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.graphics.Rect;
 import android.hardware.Camera;
+import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -15,7 +16,7 @@ import android.view.SurfaceView;
 /**
  *
  */
-public class SquareCameraPreview extends SurfaceView {
+public class SquareCameraPreview extends GLSurfaceView {
 
     public static final String TAG = SquareCameraPreview.class.getSimpleName();
     private static final int INVALID_POINTER_ID = -1;
@@ -56,10 +57,10 @@ public class SquareCameraPreview extends SurfaceView {
         init(context);
     }
 
-    public SquareCameraPreview(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        init(context);
-    }
+//    public SquareCameraPreview(Context context, AttributeSet attrs, int defStyle) {
+//        super(context, attrs, defStyle);
+//        init(context);
+//    }
 
     private void init(Context context) {
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());

@@ -19,6 +19,7 @@ package com.android.grafika;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -28,9 +29,11 @@ import android.content.Intent;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
+import android.hardware.Camera.Size;
 import android.opengl.EGL14;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -38,6 +41,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -137,6 +141,7 @@ public class CameraCaptureActivity extends Activity
     static final int FILTER_SHARPEN = 3;
     static final int FILTER_EDGE_DETECT = 4;
     static final int FILTER_EMBOSS = 5;
+    static final int PREVIEW_SIZE_MAX_WIDTH = 640;
 
     private GLSurfaceView mGLView;
     private CameraSurfaceRenderer mRenderer;
@@ -145,6 +150,9 @@ public class CameraCaptureActivity extends Activity
     private boolean mRecordingEnabled;      // controls button state
     private boolean mPauseEnabled;
     private View mCaptureButton;
+    
+    private int mCoverHeight;
+    private int mPreviewHeight;
 
     private int mCameraPreviewWidth, mCameraPreviewHeight;
 
@@ -187,11 +195,39 @@ public class CameraCaptureActivity extends Activity
 
         // Configure the GLSurfaceView.  This will start the Renderer thread, with an
         // appropriate EGL context.
-        mGLView = (GLSurfaceView) findViewById(R.id.cameraPreview_surfaceView);
+        mGLView = (GLSurfaceView) findViewById(R.id.camera_preview_view);
         mGLView.setEGLContextClientVersion(2);     // select GLES 2.0
         mRenderer = new CameraSurfaceRenderer(mCameraHandler, sVideoEncoder, outputFile);
         mGLView.setRenderer(mRenderer);
         mGLView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+        
+        final View topCoverView = findViewById(R.id.cover_top_view);
+        final View btnCoverView = findViewById(R.id.cover_bottom_view);
+
+        if (mCoverHeight == 0) {
+            ViewTreeObserver observer = mGLView.getViewTreeObserver();
+            observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    int width = mGLView.getWidth();
+                    mPreviewHeight = mGLView.getHeight();
+                    mCoverHeight = (mPreviewHeight - width) / 2;
+
+                    Log.d(TAG, "preview width " + width + " height " + mPreviewHeight);
+                    topCoverView.getLayoutParams().height = mCoverHeight;
+                    btnCoverView.getLayoutParams().height = mCoverHeight;
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    	mGLView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    } else {
+                    	mGLView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    }
+                }
+            });
+        } else {
+            topCoverView.getLayoutParams().height = mCoverHeight;
+            btnCoverView.getLayoutParams().height = mCoverHeight;
+        }
 
         Log.d(TAG, "onCreate complete: " + this);
     }
@@ -204,9 +240,9 @@ public class CameraCaptureActivity extends Activity
         openCamera(1088, 1088);      // updates mCameraPreviewWidth/Height
 
         // Set the preview aspect ratio.
-        AspectFrameLayout layout = (AspectFrameLayout) findViewById(R.id.cameraPreview_afl);
-        layout.setAspectRatio(//(double) mCameraPreviewHeight / mCameraPreviewWidth);
-        		(double) mCameraPreviewWidth / mCameraPreviewHeight);
+//        AspectFrameLayout layout = (AspectFrameLayout) findViewById(R.id.cameraPreview_afl);
+//        layout.setAspectRatio(//(double) mCameraPreviewHeight / mCameraPreviewWidth);
+//        		(double) mCameraPreviewWidth / mCameraPreviewHeight);
 
         mGLView.onResume();
         mGLView.queueEvent(new Runnable() {
@@ -256,6 +292,36 @@ public class CameraCaptureActivity extends Activity
     }
 
     @Override public void onNothingSelected(AdapterView<?> parent) {}
+    
+    private Size determineBestPreviewSize(Camera.Parameters parameters) {
+        return determineBestSize(parameters.getSupportedPreviewSizes(), PREVIEW_SIZE_MAX_WIDTH);
+    }
+
+//    private Size determineBestPictureSize(Camera.Parameters parameters) {
+//        return determineBestSize(parameters.getSupportedPictureSizes(), PICTURE_SIZE_MAX_WIDTH);
+//    }
+
+    private Size determineBestSize(List<Size> sizes, int widthThreshold) {
+        Size bestSize = null;
+        Size size;
+        int numOfSizes = sizes.size();
+        for (int i = 0; i < numOfSizes; i++) {
+            size = sizes.get(i);
+            boolean isDesireRatio = (size.width / 4) == (size.height / 3);
+            boolean isBetterSize = (bestSize == null) || size.width > bestSize.width;
+
+            if (isDesireRatio && isBetterSize) {
+                bestSize = size;
+            }
+        }
+
+        if (bestSize == null) {
+            Log.d(TAG, "cannot find the best camera size");
+            return sizes.get(sizes.size() - 1);
+        }
+
+        return bestSize;
+    }
 
     /**
      * Opens a camera, and attempts to establish preview mode at the specified width and height.
@@ -287,8 +353,12 @@ public class CameraCaptureActivity extends Activity
         }
 
         Camera.Parameters parms = mCamera.getParameters();
+        
+        Size bestPreviewSize = determineBestPreviewSize(parms);
 
-        CameraUtils.choosePreviewSize(parms, desiredWidth, desiredHeight);
+        parms.setPreviewSize(bestPreviewSize.width, bestPreviewSize.height);
+
+//        CameraUtils.choosePreviewSize(parms, desiredWidth, desiredHeight);
 
         // Give the camera a hint that we're recording video.  This can have a big
         // impact on frame rate.
@@ -826,7 +896,7 @@ class CameraSurfaceRenderer implements GLSurfaceView.Renderer {
                     Log.d(TAG, "START recording");
                     // start recording
                     mVideoEncoder.startRecording(new TextureMovieEncoder.EncoderConfig(
-                            mOutputFile, 640, 480, 1000000, EGL14.eglGetCurrentContext()));
+                            mOutputFile, mIncomingWidth, mIncomingHeight, 1000000, EGL14.eglGetCurrentContext()));
                     mRecordingStatus = RECORDING_ON;
                     break;
                 case RECORDING_RESUMED:

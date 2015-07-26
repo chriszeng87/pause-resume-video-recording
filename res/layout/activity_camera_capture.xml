@@ -24,7 +24,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".CameraCaptureActivity" >
 
-    <com.android.grafika.AspectFrameLayout
+    <!--  com.android.grafika.AspectFrameLayout
         android:id="@+id/cameraPreview_afl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,20 +38,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center" />
-    </com.android.grafika.AspectFrameLayout>
+    </com.android.grafika.AspectFrameLayout> -->
+    
+       <com.android.grafika.SquareCameraPreview
+        android:id="@+id/camera_preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     
     <View
         android:id="@+id/cover_top_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_alignTop="@id/cameraPreview_afl"
+        android:layout_alignTop="@id/camera_preview_view"
         android:background="@android:color/black"/>
 
     <View
         android:id="@+id/cover_bottom_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_alignBottom="@id/cameraPreview_afl"
+        android:layout_alignBottom="@id/camera_preview_view"
         android:background="@android:color/black"/>
 
     <Button
