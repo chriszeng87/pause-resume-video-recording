@@ -237,7 +237,7 @@ public class CameraCaptureActivity extends Activity
         Log.d(TAG, "onResume -- acquiring camera");
         super.onResume();
         updateControls();
-        openCamera(1088, 1088);      // updates mCameraPreviewWidth/Height
+        openCamera();//1088, 1088);      // updates mCameraPreviewWidth/Height
 
         // Set the preview aspect ratio.
 //        AspectFrameLayout layout = (AspectFrameLayout) findViewById(R.id.cameraPreview_afl);
@@ -328,7 +328,7 @@ public class CameraCaptureActivity extends Activity
      * <p>
      * Sets mCameraPreviewWidth and mCameraPreviewHeight to the actual width/height of the preview.
      */
-    private void openCamera(int desiredWidth, int desiredHeight) {
+    private void openCamera() {//int desiredWidth, int desiredHeight) {
         if (mCamera != null) {
             throw new RuntimeException("camera already initialized");
         }
@@ -426,19 +426,25 @@ public class CameraCaptureActivity extends Activity
             }
         }
 
-        int displayOrientation;
+        final int displayOrientation;
 
         // Camera direction
         if (cameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT) {
             // Orientation is angle of rotation when facing the camera for
             // the camera image to match the natural orientation of the device
-            displayOrientation = (cameraInfo.orientation + degrees) % 360;
-            displayOrientation = (360 - displayOrientation) % 360;
+            int tmpDisplayOrientation = (cameraInfo.orientation + degrees) % 360;
+            displayOrientation = (360 - tmpDisplayOrientation) % 360;
         } else {
             displayOrientation = (cameraInfo.orientation - degrees + 360) % 360;
         }
 
         mCamera.setDisplayOrientation(displayOrientation);
+        mGLView.queueEvent(new Runnable() {
+            @Override public void run() {
+                // notify the renderer that we want to change the encoder's state
+                mRenderer.setDisplayOrientation(displayOrientation);
+            }
+        });
     }
 
 //    public int getCameraDisplayOrientation(int facing) {
@@ -692,6 +698,7 @@ class CameraSurfaceRenderer implements GLSurfaceView.Renderer {
 
     private int mCurrentFilter;
     private int mNewFilter;
+    private int mDisplayOrientation;
 
 
     /**
@@ -751,6 +758,10 @@ class CameraSurfaceRenderer implements GLSurfaceView.Renderer {
     
     public void changePauseState(boolean isPause) {
     	mPauseEnabled = isPause;
+    }
+    
+    public void setDisplayOrientation(int orientation) {
+    	mDisplayOrientation = orientation;
     }
 
     /**
@@ -895,6 +906,11 @@ class CameraSurfaceRenderer implements GLSurfaceView.Renderer {
                 case RECORDING_OFF:
                     Log.d(TAG, "START recording");
                     // start recording
+                    if (mDisplayOrientation == 90 || mDisplayOrientation == 270) {
+                    	int temp = mIncomingWidth;
+                    	mIncomingWidth = mIncomingHeight;
+                    	mIncomingHeight = temp;
+                    }
                     mVideoEncoder.startRecording(new TextureMovieEncoder.EncoderConfig(
                             mOutputFile, mIncomingWidth, mIncomingHeight, 1000000, EGL14.eglGetCurrentContext()));
                     mRecordingStatus = RECORDING_ON;
