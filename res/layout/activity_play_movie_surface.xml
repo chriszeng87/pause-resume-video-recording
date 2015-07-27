@@ -40,7 +40,7 @@
         android:layout_alignTop="@id/play_stop_button"
         android:layout_toRightOf="@id/play_stop_button" />
 
-    <com.android.grafika.AspectFrameLayout
+    <com.chris.video.AspectFrameLayout
         android:id="@+id/playMovie_afl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,6 +53,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="center" />
 
-    </com.android.grafika.AspectFrameLayout>
+    </com.chris.video.AspectFrameLayout>
 
 </RelativeLayout>

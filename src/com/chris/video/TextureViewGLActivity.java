@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.grafika;
+package com.chris.video;
 
 import android.opengl.GLES20;
 import android.opengl.GLES30;
@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.app.Activity;
 import android.graphics.SurfaceTexture;
 
+import com.android.grafika.R;
 import com.android.grafika.gles.EglCore;
 import com.android.grafika.gles.WindowSurface;
 

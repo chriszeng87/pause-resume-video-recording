@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.grafika;
+package com.chris.video;
 
 import android.opengl.GLES20;
 import android.os.Bundle;
@@ -31,6 +31,7 @@ import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.os.Trace;
 
+import com.android.grafika.R;
 import com.android.grafika.gles.EglCore;
 import com.android.grafika.gles.WindowSurface;
 

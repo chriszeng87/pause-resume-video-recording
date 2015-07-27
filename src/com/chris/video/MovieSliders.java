@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.grafika;
+package com.chris.video;
 
 import android.opengl.GLES20;
 import android.util.Log;

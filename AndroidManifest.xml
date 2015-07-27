@@ -38,15 +38,15 @@
         android:theme="@style/AppTheme" >
 
         <activity
-            android:name="com.android.grafika.PlayMovieActivity"
+            android:name="com.chris.video.PlayMovieActivity"
             android:label="@string/title_activity_play_movie" >
         </activity>
         <activity
-            android:name="com.android.grafika.LiveCameraActivity"
+            android:name="com.chris.video.LiveCameraActivity"
             android:label="@string/title_activity_live_camera" >
         </activity>
         <activity
-            android:name="com.android.grafika.CameraCaptureActivity"
+            android:name="com.chris.video.CameraCaptureActivity"
             android:label="@string/title_activity_camera_capture" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,15 +54,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.android.grafika.TextureViewGLActivity"
+            android:name="com.chris.video.TextureViewGLActivity"
             android:label="@string/title_activity_texture_view_gl" >
         </activity>
         <activity
-            android:name="com.android.grafika.TextureViewCanvasActivity"
+            android:name="com.chris.video.TextureViewCanvasActivity"
             android:label="@string/title_activity_texture_view_canvas" >
         </activity>
         <activity
-            android:name="com.android.grafika.RecordFBOActivity"
+            android:name="com.chris.video.RecordFBOActivity"
             android:label="@string/title_activity_record_fbo"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
 
@@ -74,20 +74,20 @@
             <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" -->
         </activity>
         <activity
-            android:name="com.android.grafika.ContinuousCaptureActivity"
+            android:name="com.chris.video.ContinuousCaptureActivity"
             android:label="@string/title_activity_continuous_capture" >
         </activity>
         <activity
-            android:name="com.android.grafika.PlayMovieSurfaceActivity"
+            android:name="com.chris.video.PlayMovieSurfaceActivity"
             android:label="@string/title_activity_play_movie_surface" >
         </activity>
         <activity
-            android:name="com.android.grafika.MultiSurfaceActivity"
+            android:name="com.chris.video.MultiSurfaceActivity"
             android:label="@string/title_activity_multi_surface_test"
             android:theme="@android:style/Theme.Holo" >
         </activity>
         <activity
-            android:name="com.android.grafika.TextureFromCameraActivity"
+            android:name="com.chris.video.TextureFromCameraActivity"
             android:label="@string/title_texture_from_camera"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>

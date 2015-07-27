@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.grafika;
+package com.chris.video;
 
 import android.hardware.Camera;
 import android.util.Log;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.grafika;
+package com.chris.video;
 
 /**
  * Content, managed by ContentManager.

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.grafika;
+package com.chris.video;
 
 import android.opengl.GLES20;
 import android.opengl.GLES30;
@@ -35,6 +35,7 @@ import android.widget.TextView;
 import android.app.Activity;
 import android.graphics.Rect;
 
+import com.android.grafika.R;
 import com.android.grafika.gles.Drawable2d;
 import com.android.grafika.gles.EglCore;
 import com.android.grafika.gles.FlatShadedProgram;

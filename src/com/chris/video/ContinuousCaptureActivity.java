@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.grafika;
+package com.chris.video;
 
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
 
+import com.android.grafika.R;
 import com.android.grafika.gles.EglCore;
 import com.android.grafika.gles.FullFrameRect;
 import com.android.grafika.gles.Texture2dProgram;

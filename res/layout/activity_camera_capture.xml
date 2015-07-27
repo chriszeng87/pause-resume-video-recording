@@ -40,7 +40,7 @@
             android:layout_gravity="center" />
     </com.android.grafika.AspectFrameLayout> -->
     
-       <com.android.grafika.SquareCameraPreview
+       <com.chris.video.SquareCameraPreview
         android:id="@+id/camera_preview_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
