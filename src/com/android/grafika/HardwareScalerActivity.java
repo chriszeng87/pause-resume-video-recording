@@ -61,7 +61,7 @@ import java.lang.ref.WeakReference;
  */
 public class HardwareScalerActivity extends Activity implements SurfaceHolder.Callback,
         Choreographer.FrameCallback {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = HardwareScalerActivity.class.getSimpleName();
 
     // [ This used to have "a few thoughts about app life cycle and SurfaceView".  These
     //   are now at http://source.android.com/devices/graphics/architecture.html in

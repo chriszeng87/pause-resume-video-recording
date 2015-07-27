@@ -34,7 +34,7 @@ import java.nio.ByteBuffer;
  * Base class for generated movies.
  */
 public abstract class GeneratedMovie implements Content {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = GeneratedMovie.class.getSimpleName();
     private static final boolean VERBOSE = false;
 
     private static final int IFRAME_INTERVAL = 5;

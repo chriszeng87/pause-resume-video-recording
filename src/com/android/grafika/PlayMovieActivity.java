@@ -49,7 +49,7 @@ import java.io.IOException;
  */
 public class PlayMovieActivity extends Activity implements OnItemSelectedListener,
         TextureView.SurfaceTextureListener, MoviePlayer.PlayerFeedback {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = PlayMovieActivity.class.getSimpleName();
 
     private TextureView mTextureView;
     private String[] mMovieFiles;

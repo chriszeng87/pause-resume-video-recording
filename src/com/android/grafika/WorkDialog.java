@@ -26,7 +26,7 @@ import android.view.View;
  * Utility functions for work_dialog.
  */
 public class WorkDialog {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = WorkDialog.class.getSimpleName();
 
     private WorkDialog() {}     // nah
 

@@ -25,7 +25,7 @@ import java.util.List;
  * Camera-related utility functions.
  */
 public class CameraUtils {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = CameraUtils.class.getSimpleName();
 
     /**
      * Attempts to find a preview size that matches the provided width and height (which

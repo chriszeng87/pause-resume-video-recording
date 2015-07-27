@@ -31,7 +31,7 @@ import android.graphics.Typeface;
  * Show color bars.
  */
 public class ColorBarActivity extends Activity implements SurfaceHolder.Callback {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = ColorBarActivity.class.getSimpleName();
 
     private SurfaceView mSurfaceView;
 

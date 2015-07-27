@@ -71,7 +71,7 @@ import java.io.IOException;
  */
 public class PlayMovieSurfaceActivity extends Activity implements OnItemSelectedListener,
         SurfaceHolder.Callback, MoviePlayer.PlayerFeedback {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = PlayMovieSurfaceActivity.class.getSimpleName();
 
     private SurfaceView mSurfaceView;
     private String[] mMovieFiles;

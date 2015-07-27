@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
  * Some handy utilities.
  */
 public class MiscUtils {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = MiscUtils.class.getSimpleName();
 
     private MiscUtils() {}
 

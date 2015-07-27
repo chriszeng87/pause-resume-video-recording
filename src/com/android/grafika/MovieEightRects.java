@@ -29,7 +29,7 @@ import java.io.IOException;
  * To add a little flavor, the timing of the frames speeds up as the movie continues.
  */
 public class MovieEightRects extends GeneratedMovie {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = MovieEightRects.class.getSimpleName();
 
     private static final String MIME_TYPE = "video/avc";
     private static final int WIDTH = 320;

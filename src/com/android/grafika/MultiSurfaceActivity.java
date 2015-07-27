@@ -47,7 +47,7 @@ import com.android.grafika.gles.WindowSurface;
  * (most interesting while bouncing).
  */
 public class MultiSurfaceActivity extends Activity implements SurfaceHolder.Callback {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = PlayMovieActivity.class.getSimpleName();
 
     // Number of steps in each direction.  There's actually N+1 positions because we
     // don't re-draw the same position after a rebound.

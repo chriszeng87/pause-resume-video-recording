@@ -26,7 +26,7 @@ import java.io.IOException;
  * Generates a simple movie, featuring two small rectangles that slide across the screen.
  */
 public class MovieSliders extends GeneratedMovie {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = MovieSliders.class.getSimpleName();
 
     private static final String MIME_TYPE = "video/avc";
     private static final int WIDTH = 480;       // note 480x640, not 640x480

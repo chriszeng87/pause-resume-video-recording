@@ -31,7 +31,7 @@ import java.io.IOException;
  * TODO: add options for different display sizes, frame rates, camera selection, etc.
  */
 public class LiveCameraActivity extends Activity implements TextureView.SurfaceTextureListener {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = LiveCameraActivity.class.getSimpleName();
 
     private Camera mCamera;
     private TextureView mTextureView;

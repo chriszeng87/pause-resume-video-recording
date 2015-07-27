@@ -53,7 +53,7 @@ import com.android.grafika.gles.WindowSurface;
  * than onPause()).  Normally the renderer would be stopped when the application pauses.
  */
 public class TextureViewGLActivity extends Activity {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = TextureViewGLActivity.class.getSimpleName();
 
     // Experiment with allowing TextureView to release the SurfaceTexture from the callback vs.
     // releasing it explicitly ourselves from the draw loop.  The latter seems to be problematic

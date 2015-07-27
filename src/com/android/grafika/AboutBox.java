@@ -30,7 +30,7 @@ import android.view.View;
  * Creates and displays an "about" box.
  */
 public class AboutBox {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = AboutBox.class.getSimpleName();
 
     /**
      * Retrieves the application's version info.

@@ -54,7 +54,7 @@ import java.lang.ref.WeakReference;
  */
 public class ContinuousCaptureActivity extends Activity implements SurfaceHolder.Callback,
         SurfaceTexture.OnFrameAvailableListener {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = ContinuousCaptureActivity.class.getSimpleName();
 
     private static final int VIDEO_WIDTH = 1280;  // dimensions for 720p video
     private static final int VIDEO_HEIGHT = 720;

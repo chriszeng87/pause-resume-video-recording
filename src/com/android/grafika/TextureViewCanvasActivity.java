@@ -37,7 +37,7 @@ import android.graphics.SurfaceTexture;
  * than onPause()).  Normally the renderer would be stopped when the application pauses.
  */
 public class TextureViewCanvasActivity extends Activity {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = TextureViewCanvasActivity.class.getSimpleName();
 
     private TextureView mTextureView;
     private Renderer mRenderer;

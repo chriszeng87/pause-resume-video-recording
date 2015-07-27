@@ -28,7 +28,7 @@ import java.nio.FloatBuffer;
  * "zoom" effect.
  */
 public class ScaledDrawable2d extends Drawable2d {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = ScaledDrawable2d.class.getSimpleName();
 
     private static final int SIZEOF_FLOAT = 4;
 

@@ -37,7 +37,7 @@ import java.util.ArrayList;
  * Class is thread-safe.
  */
 public class ContentManager {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = ContentManager.class.getSimpleName();
 
     // Enumerated content tags.  These are used as indices into the mContent ArrayList,
     // so don't make them sparse.

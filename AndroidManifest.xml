@@ -37,15 +37,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-        <!-- android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" > -->
-        <activity
-            android:name="com.android.grafika.MainActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="com.android.grafika.ReadPixelsActivity"
-            android:label="@string/title_activity_read_pixels" >
-        </activity>
         <activity
             android:name="com.android.grafika.PlayMovieActivity"
             android:label="@string/title_activity_play_movie" >
@@ -83,14 +74,6 @@
             <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" -->
         </activity>
         <activity
-            android:name="com.android.grafika.ChorTestActivity"
-            android:label="@string/title_activity_chor_test" >
-        </activity>
-        <activity
-            android:name="com.android.grafika.DoubleDecodeActivity"
-            android:label="@string/title_activity_double_decode" >
-        </activity>
-        <activity
             android:name="com.android.grafika.ContinuousCaptureActivity"
             android:label="@string/title_activity_continuous_capture" >
         </activity>
@@ -119,10 +102,6 @@
         <activity
             android:name="com.android.grafika.CodecOpenActivity"
             android:label="@string/title_activity_codec_open" >
-        </activity>
-        <activity
-            android:name="com.android.grafika.TextureUploadActivity"
-            android:label="@string/title_activity_texture_upload" >
         </activity>
         <activity
             android:name="com.android.grafika.ColorBarActivity"

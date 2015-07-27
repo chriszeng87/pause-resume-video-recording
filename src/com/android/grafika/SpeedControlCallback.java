@@ -32,7 +32,7 @@ import android.util.Log;
  * only be called from the MoviePlayer.
  */
 public class SpeedControlCallback implements MoviePlayer.FrameCallback {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = SpeedControlCallback.class.getSimpleName();
     private static final boolean CHECK_SLEEP_TIME = false;
 
     private static final long ONE_MILLION = 1000000L;

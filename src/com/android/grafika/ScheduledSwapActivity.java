@@ -57,7 +57,7 @@ import java.lang.ref.WeakReference;
  */
 public class ScheduledSwapActivity extends Activity implements OnItemSelectedListener,
         SurfaceHolder.Callback, Choreographer.FrameCallback {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = ScheduledSwapActivity.class.getSimpleName();
 
     private final static long ONE_MILLISECOND_NS = 1000000;
 

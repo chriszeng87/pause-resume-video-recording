@@ -43,7 +43,7 @@ import java.lang.ref.WeakReference;
  * TODO: reconcile this with TextureMovieEncoder.
  */
 public class TextureMovieEncoder2 implements Runnable {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = TextureMovieEncoder2.class.getSimpleName();
     private static final boolean VERBOSE = false;
 
     private static final int MSG_STOP_RECORDING = 1;

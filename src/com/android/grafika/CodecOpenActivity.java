@@ -34,7 +34,7 @@ import android.content.DialogInterface;
  * and a "Halt" button (which kills the app so you can see if mediaserver is cleaning up).
  */
 public class CodecOpenActivity extends Activity {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = CodecOpenActivity.class.getSimpleName();
 
     private static final int MAX_OPEN = 256;
 

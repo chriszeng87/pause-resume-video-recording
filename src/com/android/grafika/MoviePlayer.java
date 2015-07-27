@@ -36,7 +36,7 @@ import java.nio.ByteBuffer;
  * TODO: needs more advanced shuttle controls (pause/resume, skip)
  */
 public class MoviePlayer {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = MoviePlayer.class.getSimpleName();
     private static final boolean VERBOSE = false;
 
     // Declare this here to reduce allocations.

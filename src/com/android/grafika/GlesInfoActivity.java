@@ -37,7 +37,7 @@ import java.util.Arrays;
  * Simple activity that gathers and displays information from the GLES driver.
  */
 public class GlesInfoActivity extends Activity {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = GlesInfoActivity.class.getSimpleName();
 
     private String mGlInfo;
     private File mOutputFile;

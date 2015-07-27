@@ -78,7 +78,7 @@ import java.lang.ref.WeakReference;
  */
 public class TextureFromCameraActivity extends Activity implements SurfaceHolder.Callback,
         SeekBar.OnSeekBarChangeListener {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = TextureFromCameraActivity.class.getSimpleName();
 
     private static final int DEFAULT_ZOOM_PERCENT = 0;      // 0-100
     private static final int DEFAULT_SIZE_PERCENT = 50;     // 0-100

@@ -40,7 +40,7 @@ import java.nio.ByteBuffer;
  * See also https://code.google.com/p/android/issues/detail?id=61194
  */
 public class SoftInputSurfaceActivity extends Activity {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = SoftInputSurfaceActivity.class.getSimpleName();
     private static final boolean VERBOSE = true;
 
     private static final String MIME_TYPE = "video/avc";

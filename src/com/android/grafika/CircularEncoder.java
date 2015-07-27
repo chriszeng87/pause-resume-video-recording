@@ -49,7 +49,7 @@ import java.nio.ByteBuffer;
  * and then go back to what we were doing.
  */
 public class CircularEncoder {
-    private static final String TAG = MainActivity.TAG;
+    private static final String TAG = CircularEncoder.class.getSimpleName();
     private static final boolean VERBOSE = false;
 
     private static final String MIME_TYPE = "video/avc";    // H.264 Advanced Video Coding
