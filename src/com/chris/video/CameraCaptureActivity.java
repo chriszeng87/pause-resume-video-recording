@@ -51,7 +51,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.android.grafika.R;
 import com.android.grafika.gles.FullFrameRect;
 import com.android.grafika.gles.Texture2dProgram;
 

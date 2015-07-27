@@ -16,22 +16,21 @@
 
 package com.chris.video;
 
-import android.opengl.GLES20;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Surface;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.View;
 import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
+import android.opengl.GLES20;
+import android.os.Bundle;
 import android.os.Trace;
+import android.util.Log;
+import android.view.Surface;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.view.View;
 
-import com.android.grafika.R;
 import com.android.grafika.gles.EglCore;
 import com.android.grafika.gles.WindowSurface;
 

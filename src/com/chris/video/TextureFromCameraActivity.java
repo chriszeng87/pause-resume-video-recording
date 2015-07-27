@@ -16,6 +16,10 @@
 
 package com.chris.video;
 
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+
+import android.app.Activity;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.GLES20;
@@ -31,18 +35,13 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.app.Activity;
 
-import com.android.grafika.R;
 import com.android.grafika.gles.Drawable2d;
 import com.android.grafika.gles.EglCore;
 import com.android.grafika.gles.GlUtil;
 import com.android.grafika.gles.Sprite2d;
 import com.android.grafika.gles.Texture2dProgram;
 import com.android.grafika.gles.WindowSurface;
-
-import java.io.IOException;
-import java.lang.ref.WeakReference;
 
 /**
  * Direct the Camera preview to a GLES texture and manipulate it.

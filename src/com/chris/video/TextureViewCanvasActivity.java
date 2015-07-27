@@ -16,18 +16,16 @@
 
 package com.chris.video;
 
-import com.android.grafika.R;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Surface;
-import android.view.TextureView;
 import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Surface;
+import android.view.TextureView;
 
 /**
  * A demonstration of using Canvas to draw on a TextureView.  Based on TextureViewGLActivity.

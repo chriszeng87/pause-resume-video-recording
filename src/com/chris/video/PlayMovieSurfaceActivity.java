@@ -16,6 +16,10 @@
 
 package com.chris.video;
 
+import java.io.File;
+import java.io.IOException;
+
+import android.app.Activity;
 import android.opengl.GLES20;
 import android.os.Bundle;
 import android.os.Environment;
@@ -25,18 +29,13 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.app.Activity;
 
-import com.android.grafika.R;
 import com.android.grafika.gles.EglCore;
 import com.android.grafika.gles.WindowSurface;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Play a movie from a file on disk.  Output goes to a SurfaceView.

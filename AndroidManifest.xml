@@ -16,7 +16,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.grafika"
+    package="com.chris.video"
     android:versionCode="33"
     android:versionName="1.0" >
 

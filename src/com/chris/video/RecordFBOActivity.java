@@ -16,6 +16,12 @@
 
 package com.chris.video;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+
+import android.app.Activity;
+import android.graphics.Rect;
 import android.opengl.GLES20;
 import android.opengl.GLES30;
 import android.opengl.Matrix;
@@ -32,10 +38,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.app.Activity;
-import android.graphics.Rect;
 
-import com.android.grafika.R;
 import com.android.grafika.gles.Drawable2d;
 import com.android.grafika.gles.EglCore;
 import com.android.grafika.gles.FlatShadedProgram;
@@ -44,10 +47,6 @@ import com.android.grafika.gles.GlUtil;
 import com.android.grafika.gles.Sprite2d;
 import com.android.grafika.gles.Texture2dProgram;
 import com.android.grafika.gles.WindowSurface;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
 
 /**
  * Demonstrates efficient display + recording of OpenGL rendering using an FBO.  This

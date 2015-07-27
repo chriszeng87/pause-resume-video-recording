@@ -16,6 +16,11 @@
 
 package com.chris.video;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+
+import android.app.Activity;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.GLES20;
@@ -29,17 +34,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.Activity;
 
-import com.android.grafika.R;
 import com.android.grafika.gles.EglCore;
 import com.android.grafika.gles.FullFrameRect;
 import com.android.grafika.gles.Texture2dProgram;
 import com.android.grafika.gles.WindowSurface;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
 
 /**
  * Demonstrates capturing video into a ring buffer.  When the "capture" button is clicked,

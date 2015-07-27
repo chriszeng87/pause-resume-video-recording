@@ -16,26 +16,24 @@
 
 package com.chris.video;
 
-import android.os.Bundle;
-import android.os.Environment;
+import java.io.File;
+import java.io.IOException;
+
 import android.app.Activity;
 import android.graphics.Matrix;
 import android.graphics.SurfaceTexture;
+import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
-import android.widget.AdapterView.OnItemSelectedListener;
-
-import java.io.File;
-import java.io.IOException;
-
-import com.android.grafika.R;
 
 /**
  * Play a movie from a file on disk.  Output goes to a TextureView.
