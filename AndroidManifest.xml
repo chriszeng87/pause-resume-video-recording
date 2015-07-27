@@ -78,19 +78,6 @@
             android:label="@string/title_activity_continuous_capture" >
         </activity>
         <activity
-            android:name="com.android.grafika.SoftInputSurfaceActivity"
-            android:label="@string/title_activity_soft_input_surface" >
-        </activity>
-        <activity
-            android:name="com.android.grafika.HardwareScalerActivity"
-            android:label="@string/title_activity_hardware_scaler"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
-        <activity
-            android:name="com.android.grafika.GlesInfoActivity"
-            android:label="@string/title_activity_gles_info" >
-        </activity>
-        <activity
             android:name="com.android.grafika.PlayMovieSurfaceActivity"
             android:label="@string/title_activity_play_movie_surface" >
         </activity>
@@ -98,20 +85,6 @@
             android:name="com.android.grafika.MultiSurfaceActivity"
             android:label="@string/title_activity_multi_surface_test"
             android:theme="@android:style/Theme.Holo" >
-        </activity>
-        <activity
-            android:name="com.android.grafika.CodecOpenActivity"
-            android:label="@string/title_activity_codec_open" >
-        </activity>
-        <activity
-            android:name="com.android.grafika.ColorBarActivity"
-            android:label="@string/title_color_bar"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
-        <activity
-            android:name="com.android.grafika.ScheduledSwapActivity"
-            android:label="@string/title_scheduled_swap"
-            android:theme="@android:style/Theme.Black" >
         </activity>
         <activity
             android:name="com.android.grafika.TextureFromCameraActivity"
