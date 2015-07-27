@@ -60,19 +60,10 @@
         android:background="@android:color/black"/>
 
     <Button
-        android:id="@+id/toggleRecording_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="clickToggleRecording"
-        android:text="@string/toggleRecordingOn" />
-
-    <Button
         android:id="@+id/togPause_button"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/toggleRecording_button"
         android:onClick="clickTogglePause"
         android:text="@string/toggleRecordingPause" />
 
@@ -89,7 +80,7 @@
         android:id="@+id/cameraParams_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toggleRecording_button"
+        android:layout_below="@id/togPause_button"
         android:text="[?]"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

@@ -236,7 +236,6 @@ public class CameraCaptureActivity extends Activity
     protected void onResume() {
         Log.d(TAG, "onResume -- acquiring camera");
         super.onResume();
-        updateControls();
         openCamera();//1088, 1088);      // updates mCameraPreviewWidth/Height
 
         // Set the preview aspect ratio.
@@ -507,7 +506,6 @@ public class CameraCaptureActivity extends Activity
                 mRenderer.changeRecordingState(mRecordingEnabled);
             }
         });
-        updateControls();
     }
     
     /**
@@ -522,27 +520,6 @@ public class CameraCaptureActivity extends Activity
             }
         });
         updateControls2();
-    }
-
-//    /**
-//     * onClick handler for "rebind" checkbox.
-//     */
-//    public void clickRebindCheckbox(View unused) {
-//        CheckBox cb = (CheckBox) findViewById(R.id.rebindHack_checkbox);
-//        TextureRender.sWorkAroundContextProblem = cb.isChecked();
-//    }
-
-    /**
-     * Updates the on-screen controls to reflect the current state of the app.
-     */
-    private void updateControls() {
-        Button toggleRelease = (Button) findViewById(R.id.toggleRecording_button);
-        int id = mRecordingEnabled ?
-                R.string.toggleRecordingOff : R.string.toggleRecordingOn;
-        toggleRelease.setText(id);
-
-        //CheckBox cb = (CheckBox) findViewById(R.id.rebindHack_checkbox);
-        //cb.setChecked(TextureRender.sWorkAroundContextProblem);
     }
     
     /**
