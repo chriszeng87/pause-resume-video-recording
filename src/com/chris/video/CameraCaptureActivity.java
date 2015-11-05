@@ -962,7 +962,7 @@ class CameraSurfaceRenderer implements GLSurfaceView.Renderer {
         // Draw a flashing box if we're recording.  This only appears on screen.
         showBox = (mRecordingStatus == RECORDING_ON);
         if (showBox && (++mFrameCount & 0x04) == 0) {
-            drawBox();
+//            drawBox();
         }
     }
 
