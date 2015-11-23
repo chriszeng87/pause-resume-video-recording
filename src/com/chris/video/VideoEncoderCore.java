@@ -28,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Locale;
+import android.os.ParcelFileDescriptor;
 
 /**
  * This class wraps up the core components used for surface-input video encoding.
@@ -54,6 +55,10 @@ public class VideoEncoderCore {
     private MediaCodec.BufferInfo mBufferInfo;
     private int mTrackIndex;
     private boolean mMuxerStarted;
+//    private FileOutputStream outputStream;
+
+    private ParcelFileDescriptor [] pipeDes;
+
     private FileOutputStream outputStream;
 
 
@@ -91,15 +96,25 @@ public class VideoEncoderCore {
         mMuxer = new MediaMuxer(outputFile.toString(),
                 MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
 
+        try {
+            pipeDes = ParcelFileDescriptor.createPipe();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+
         outputStream = null;
         String fileName =  "/sdcard/test2015.mp4";
         try {
-            outputStream = new FileOutputStream(fileName);
+            outputStream = new FileOutputStream( pipeDes[1].getFileDescriptor());
             Log.d(TAG, "encoded output will be saved as " + fileName);
-        } catch (IOException ioe) {
+        } catch (Exception ioe) {
             Log.w(TAG, "Unable to create debug output file " + fileName);
             throw new RuntimeException(ioe);
         }
+
+        //read side
+        pipeDes[0].getFileDescriptor();
 
         String avcC = "0000000167428028DA01100B5E5E01B4284D400000000168CE06E2";
 
