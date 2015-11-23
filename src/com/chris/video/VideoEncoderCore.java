@@ -24,8 +24,10 @@ import android.util.Log;
 import android.view.Surface;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.Locale;
 
 /**
  * This class wraps up the core components used for surface-input video encoding.
@@ -52,6 +54,7 @@ public class VideoEncoderCore {
     private MediaCodec.BufferInfo mBufferInfo;
     private int mTrackIndex;
     private boolean mMuxerStarted;
+    private FileOutputStream outputStream;
 
 
     /**
@@ -88,8 +91,40 @@ public class VideoEncoderCore {
         mMuxer = new MediaMuxer(outputFile.toString(),
                 MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
 
+        outputStream = null;
+        String fileName =  "/sdcard/test2015.mp4";
+        try {
+            outputStream = new FileOutputStream(fileName);
+            Log.d(TAG, "encoded output will be saved as " + fileName);
+        } catch (IOException ioe) {
+            Log.w(TAG, "Unable to create debug output file " + fileName);
+            throw new RuntimeException(ioe);
+        }
+
+        String avcC = "0000000167428028DA01100B5E5E01B4284D400000000168CE06E2";
+
+        outputStream.write(hexStr2Bytes(avcC));
+
         mTrackIndex = -1;
         mMuxerStarted = false;
+    }
+
+    public static byte[] hexStr2Bytes(String src){
+        /*对输入值进行规范化整理*/
+        src = src.trim().replace(" ", "").toUpperCase(Locale.US);
+        //处理值初始化
+        int m=0,n=0;
+        int iLen=src.length()/2; //计算长度
+        byte[] ret = new byte[iLen]; //分配存储空间
+
+        for (int i = 0; i < iLen; i++){
+
+
+            m=i*2+1;
+            n=m+1;
+            ret[i] = (byte)(Integer.decode("0x"+ src.substring(i*2, m) + src.substring(m,n)) & 0xFF);
+        }
+        return ret;
     }
 
     /**
@@ -189,6 +224,18 @@ public class VideoEncoderCore {
                     encodedData.position(mBufferInfo.offset);
                     encodedData.limit(mBufferInfo.offset + mBufferInfo.size);
 
+                    if (mBufferInfo.size > 0) {
+                        byte[] data = new byte[mBufferInfo.size];
+                        encodedData.get(data);
+                        encodedData.position(mBufferInfo.offset);
+                        try {
+                            outputStream.write(data);
+                        } catch (IOException ioe) {
+                            Log.w(TAG, "failed writing debug data to file");
+                            throw new RuntimeException(ioe);
+                        }
+                    }
+
                     mMuxer.writeSampleData(mTrackIndex, encodedData, mBufferInfo);
                     if (VERBOSE) {
                         Log.d(TAG, "sent " + mBufferInfo.size + " bytes to muxer, ts=" +
@@ -202,6 +249,14 @@ public class VideoEncoderCore {
                     if (!endOfStream) {
                         Log.w(TAG, "reached end of stream unexpectedly");
                     } else {
+                        if (outputStream != null) {
+                            try {
+                                outputStream.close();
+                            } catch (IOException ioe) {
+                                Log.w(TAG, "failed closing debug file");
+                                throw new RuntimeException(ioe);
+                            }
+                        }
                         if (VERBOSE) Log.d(TAG, "end of stream reached");
                     }
                     break;      // out of while
